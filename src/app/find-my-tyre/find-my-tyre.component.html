@@ -1,0 +1,50 @@
+
+
+<div class="container setBorder">
+    <h2 style="border: 1px;">Please Select <span style="color: blue;">{{status}}</span>:</h2>
+    <div class="row">
+        <h4 class="col-md-3" *ngIf="yearChoosen">Selected Filter : </h4>
+        <h5 class="col-md-2"  *ngIf="yearChoosen">Year : <span class="blue">{{yearChoosen}}</span></h5>
+        <h5 class="col-md-2" *ngIf="makeChoosen">Make : <span class="blue">{{makeChoosen}}</span></h5>
+        <h5 class="col-md-2" *ngIf="modelsChoosen">Model : <span class="blue">{{modelsChoosen}}</span></h5>
+        <h5 class="col-md-3" *ngIf="trimChoosen">Trim : <span class="blue">{{trimChoosen}}</span></h5>
+    </div>
+    <div class="row">
+        <div class="form-group setmargin">
+            <label>Year : </label>
+            <select name="years" [(ngModel)]="yearChoosen" (change)="getYearSelected()">
+                <option *ngFor="let y of years" value="{{y}}">{{y}}</option>
+            </select>
+        </div>
+        
+
+
+        
+
+        <div *ngIf="yearSelected" class="form-group setmargin">
+            <label>Make :</label>
+            <select name="Make" [(ngModel)]="makeChoosen" (change)="getMakeSelected()">
+                <option *ngFor="let y of makes" value="{{y}}">{{y}}</option>
+            </select>
+        </div>
+
+
+        <div *ngIf="makeSelected" class="form-group setmargin">
+            <label>Model :</label>
+            <select name="Models" [(ngModel)]="modelsChoosen" (change)="getModelSelected()">
+                <option *ngFor="let y of models" value="{{y}}">{{y}}</option>
+            </select>
+        </div>
+
+        <div *ngIf="trimSelected" class="form-group setmargin">
+            <label>Trim :</label>
+            <select name="Trims" [(ngModel)]="trimChoosen">
+                <option *ngFor="let y of trims" value="{{y}}">{{y}}</option>
+            </select>
+        </div>
+    </div>
+
+    <div>
+        <button *ngIf="trimSelected">FindTyre</button>
+    </div>
+</div>
