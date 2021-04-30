@@ -3,8 +3,8 @@
 <div class="container setBorder">
     <h2 style="border: 1px;">Please Select <span style="color: blue;">{{status}}</span>:</h2>
     <div class="row border border-primary">
-        <h4 class="col-md-3" *ngIf="yearChoosen">Selected Filter : </h4>
-        <h5 class="col-md-2"  *ngIf="yearChoosen">Year : <span class="blue">{{yearChoosen}}</span></h5>
+        <h4 class="col-md-3" *ngIf="yearChoosen != 'Select Year'">Selected Filter : </h4>
+        <h5 class="col-md-2"  *ngIf="yearChoosen != 'Select Year'">Year : <span class="blue">{{yearChoosen}}</span></h5>
         <h5 class="col-md-2" *ngIf="makeChoosen">Make : <span class="blue">{{makeChoosen}}</span></h5>
         <h5 class="col-md-2" *ngIf="modelsChoosen">Model : <span class="blue">{{modelsChoosen}}</span></h5>
         <h5 class="col-md-3" *ngIf="trimChoosen">Trim : <span class="blue">{{trimChoosen}}</span></h5>
