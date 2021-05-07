@@ -9,8 +9,10 @@ import { HomeComponent } from './home/home.component';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { StoreModule } from '@ngrx/store';
 import { rootReducer } from './reducer';
-import { TyreRepository } from './services/tyre.repository';
 import { HttpServiceService } from './services/http-service.service';
+import { EffectsModule } from '@ngrx/effects';
+import { TyreEffects } from "./effects/findTyre.effect";
+
 
 @NgModule({
   declarations: [
@@ -23,9 +25,11 @@ import { HttpServiceService } from './services/http-service.service';
     FormsModule,
         HttpClientModule,
         AppRoutingModule,
-        StoreModule.forRoot(rootReducer)
+        StoreModule.forRoot(rootReducer),
+        EffectsModule.forRoot([TyreEffects])
+
   ],
-  providers: [TyreRepository,HttpServiceService],
+  providers: [HttpServiceService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

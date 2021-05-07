@@ -41,6 +41,43 @@ export class YearListsSuccessAction {
     }
 }
 
+export class YearListsFailureAction {
+
+    readonly type = YEAR_LIST_FAILED;
+
+    constructor(private payload?:{data : any[]}){
+
+    }
+}
+
+export class MakeListsFailureAction {
+
+    readonly type = MAKE_LIST_FAILED;
+
+    constructor(private payload?:{data : any[]}){
+
+    }
+}
+
+
+export class ModelListsFailureAction {
+
+    readonly type = MODEL_LIST_FAILED;
+
+    constructor(private payload?:{data : any[]}){
+
+    }
+}
+
+export class TrimListsFailureAction {
+
+    readonly type = TRIM_LIST_FAILED;
+
+    constructor(private payload?:{data : any[]}){
+
+    }
+}
+
 export class MakeListsSuccessAction {
 
     readonly type = MAKE_LIST_SUCCESS;
@@ -67,4 +104,6 @@ export class TrimListsSuccessAction {
 
     }
 }
+
+
 

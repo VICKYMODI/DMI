@@ -1,7 +1,9 @@
 import { Component, OnInit } from "@angular/core";
 import { HttpServiceService } from "../services/http-service.service";
-import { TyreRepository } from '../services/tyre.repository'
-
+// import { TyreRepository } from '../services/tyre.repository';
+import { ModelListRequestAction,MakeListRequestAction,TrimListRequestAction,YearListRequestAction } from '../actions/findTyre-actions';
+import { Store, select } from "@ngrx/store";
+import { RootReducerState } from "../reducer";
 
 
 @Component({
@@ -10,10 +12,10 @@ import { TyreRepository } from '../services/tyre.repository'
   styleUrls: ["./find-my-tyre.component.css"]
 })
 export class FindMyTyreComponent implements OnInit {
-  years = [];
-  makes = [];
-  models = [];
-  trims = [];
+  years :any[];
+  makes :any;
+  models :any;
+  trims :any;
   yearChoosen: any = "Select Year";
   makeChoosen: any;
   modelsChoosen: any;
@@ -25,19 +27,30 @@ export class FindMyTyreComponent implements OnInit {
   status: any = "Year";
   constructor(
     private api: HttpServiceService,
-    private tyreRepository : TyreRepository
+    private store: Store<RootReducerState>
   ) {}
 
   ngOnInit(): void {
+    this.store
+    .select(state => state)
+    .subscribe(data => {
+      this.years = data.tyre.years;
+      this.makes = data.tyre.makes;
+      this.models = data.tyre.models;
+      this.trims = data.tyre.trims;
+    });
     this.getYears();
   }
 
   getYears() {
-    const yearData$ = this.tyreRepository.getYearList()[1];
-    yearData$.subscribe(res => {
-      console.log("yeardata",res)
-      this.years = res.years;
-    })
+
+    console.log("getYears");
+    const action = new YearListRequestAction();
+    // dispatch an action to get array of years
+    this.store.dispatch(action);
+    this.makes  = [];
+    this.models = [];
+    this.trims  = [];
   }
 
   getYearSelected() {
@@ -67,29 +80,29 @@ export class FindMyTyreComponent implements OnInit {
 
   getMakes() {
 
-    const makeData$ = this.tyreRepository.getMakeList()[1];
-    makeData$.subscribe(res => {
-      console.log("getMakesdata",res)
-      this.makes = res.makes;
-    })
+
+    const action = new MakeListRequestAction();
+    // dispatch an action to get array of years
+    this.store.dispatch(action);
+    this.trims  = [];
 
   }
 
   getModels() {
 
-    console.log("modelCalled")
-    const modelData$ = this.tyreRepository.getModelList()[1];
-    modelData$.subscribe(res => {
-      console.log("dataModel",res)
-      this.models = res.models;
-    })
+
+    const action = new ModelListRequestAction();
+    // dispatch an action to get array of years
+    this.store.dispatch(action);
+
+    this.trims  = [];
   }
 
   getTrims() {
-    const modelData$ = this.tyreRepository.getTrimList()[1];
-    modelData$.subscribe(res => {
-      console.log("data",res)
-      this.trims = res.trims;
-    })
+
+    const action = new TrimListRequestAction();
+    // dispatch an action to get array of years
+    this.store.dispatch(action);
+    this.trims  = [];
   }
 }
